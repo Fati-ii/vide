@@ -8,18 +8,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Note: En environnement Jenkins réel, le checkout est automatique si le Jenkinsfile est dans le repo.
-                // Ici je garde votre structure mais adaptée au projet actuel.
-                checkout scm
+                git branch: 'main', url: 'https://github.com/Fati-ii/vide.git'
             }
         }
 
         stage('Build + Sonar') {
             steps {
-                // Utilise le nom de l'environnement SonarQube configuré dans Jenkins
                 withSonarQubeEnv('sonarScanner') {
-                    // Utilise 'bat' car vous êtes sur Windows
-                    bat 'mvn clean verify sonar:sonar'
+                    bat "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins -Dsonar.projectName=jenkins -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ff05561c7f3e0f3280b72892726b3fb6b6b32dae"
                 }
             }
         }
