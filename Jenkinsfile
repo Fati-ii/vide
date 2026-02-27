@@ -15,7 +15,7 @@ pipeline {
         stage('Build + Sonar') {
             steps {
                 withSonarQubeEnv('sonarScanner') {
-                    bat "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins -Dsonar.projectName=jenkins -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ff05561c7f3e0f3280b72892726b3fb6b6b32dae"
+                    bat "mvn clean verify sonar:sonar -Dsonar.projectKey=com.ops:devops -Dsonar.projectName=com.ops:devops -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ff05561c7f3e0f3280b72892726b3fb6b6b32dae"
                 }
             }
         }
